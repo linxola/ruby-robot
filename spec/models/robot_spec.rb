@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../../app/models/desk'
 require_relative '../../app/models/robot'
 
 RSpec.describe Robot do
@@ -145,7 +146,7 @@ RSpec.describe Robot do
 
     it "prints robot's coordinates and its direction" do
       expect { robot.report }
-        .to output("Robot's coordinates are 3, 4 and it looks EAST\n").to_stdout
+        .to output("Robot's coordinates are 3,4 and it looks EAST\n").to_stdout
     end
   end
 end

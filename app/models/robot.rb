@@ -54,21 +54,21 @@ class Robot
   end
 
   def report
-    puts "Robot's coordinates are #{@x_coord}, #{@y_coord} and it looks #{@direction}"
+    puts "Robot's coordinates are #{@x_coord},#{@y_coord} and it looks #{@direction}"
   end
 
   private
 
   def validate_coordinates(x_coord, y_coord, desk = @desk)
     if [x_coord, y_coord].any?(&:negative?) || x_coord > desk.length || y_coord > desk.width
-      raise FallError, 'Fall warning: The robot will fall with such a move!'
+      raise FallError, "\nFall Warning:\n\tThe robot will fall with such a move!"
     end
   end
 
   def validate_direction(direction)
     return if DIRECTIONS.include?(direction)
 
-    raise DirectionError, 'Direction error: The direction entered is unknown,
-                           please use NORTH, EAST, SOUTH or WEST'
+    raise DirectionError, "\nDirection Error:\n\tThe direction entered is unknown " \
+                          'please use NORTH, EAST, SOUTH or WEST'
   end
 end
