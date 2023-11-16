@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Class representing the desk
+# Class representing a desk on which a robot will walk
 class Desk
   class DimensionsError < StandardError; end
 

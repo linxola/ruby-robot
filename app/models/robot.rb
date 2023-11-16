@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Class representing the robot that will walk on the desk
+# Class representing a robot that will walk on a desk
 class Robot
   class FallError < StandardError; end
   class DirectionError < StandardError; end
