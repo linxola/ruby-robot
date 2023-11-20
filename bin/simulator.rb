@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'models/desk'
-require_relative 'models/robot'
+require_relative '../lib/desk'
+require_relative '../lib/robot'
 
 # Class representing a toy robot simulator
 class Simulator

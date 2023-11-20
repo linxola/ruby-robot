@@ -66,13 +66,13 @@ In order to run the project you need this software installed:
 ### Run program
 
 ```shell
-ruby app/simulator.rb
+ruby bin/simulator.rb
 ```
 
 or you can also pass the file with commands:
 
 ```shell
-ruby app/simulator.rb <file_with_commands>
+ruby bin/simulator.rb <file_with_commands>
 ```
 
 ### Tests

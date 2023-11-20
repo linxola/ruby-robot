@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../app/models/desk'
-require_relative '../../app/models/robot'
+require_relative '../../lib/desk'
+require_relative '../../lib/robot'
 
 RSpec.describe Robot do
   subject(:robot) { described_class.new }

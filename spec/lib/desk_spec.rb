@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../app/models/desk'
+require_relative '../../lib/desk'
 
 RSpec.describe Desk do
   context 'when creating a desk' do

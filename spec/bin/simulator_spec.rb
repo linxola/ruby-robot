@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../app/models/desk'
-require_relative '../app/models/robot'
-require_relative '../app/simulator'
+require_relative '../../lib/desk'
+require_relative '../../lib/robot'
+require_relative '../../bin/simulator'
 
 # rubocop: disable RSpec/ExampleLength, RSpec/SubjectStub
 RSpec.describe Simulator do
