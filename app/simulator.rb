@@ -2,10 +2,12 @@
 
 require_relative 'models/desk'
 require_relative 'models/robot'
-require 'debug'
 
 # Class representing a toy robot simulator
 class Simulator
+  class DimensionsError < StandardError; end
+  class FormatError < StandardError; end
+
   def initialize
     puts 'Welcome to the toy robot simulator!'
     puts "In this program you can move your toy robot on a desk, but don't fall!", "\n"
@@ -39,21 +41,17 @@ class Simulator
   private
 
   def gets_desk_dimensions
-    loop do
+    begin
       puts 'Please enter the X,Y dimensions of the desk ' \
            'or leave empty for default dimensions (default is 5,6)'
-      input = gets.chomp
-      redo unless dimensions_valid?(input)
-
-      return sets_desk_dimensions(input)
+      dimensions = gets.chomp
+      raise DimensionsError unless dimensions.empty? || dimensions =~ /^[1-9]+,[1-9]+$/
+    rescue DimensionsError
+      puts "\nDimensions Error:\n\tOnly positive integers in the `X,Y` format are allowed!", "\n"
+      retry
     end
-  end
 
-  def dimensions_valid?(input)
-    return true if input.empty? || input =~ /^[1-9]+,[1-9]+$/
-
-    puts "\nDimensions Error:\n\tOnly positive integers in the `X,Y` format are allowed!", "\n"
-    false
+    sets_desk_dimensions(dimensions)
   end
 
   def sets_desk_dimensions(dimensions_string)
@@ -62,26 +60,23 @@ class Simulator
   end
 
   def place_robot
-    loop do
-      puts 'Please set position and direction for the robot on the desk'
-      place_params = gets.chomp.upcase
-      redo unless place_valid?(place_params)
+    puts 'Please set position and direction for the robot on the desk'
+    place_params = gets.chomp.upcase
+    validate_place_params(place_params)
 
-      place_params = place_params.split(/[\s,']/)
-      @robot.set_place(@desk, place_params[1].to_i, place_params[2].to_i, place_params[3])
-      break
-    rescue Robot::FallError, Robot::DirectionError => e
-      puts e.message, "\n"
-    end
+    place_params = place_params.split(/[\s,']/)
+    @robot.set_place(@desk, place_params[1].to_i, place_params[2].to_i, place_params[3])
+  rescue FormatError, Robot::FallError, Robot::DirectionError => e
+    puts e.message, "\n"
+    retry
   end
 
-  def place_valid?(place_params)
-    return true if place_params.match(/^PLACE [0-9]+,[0-9]+,[A-Z]+$/)
+  def validate_place_params(place_params)
+    return if place_params.match(/^PLACE [0-9]+,[0-9]+,[A-Z]+$/)
 
-    puts "\nFormat Error:\n\tEither the PLACE command format is not followed or " \
-         'arguments are of the wrong type!'
-    puts 'Please note that you must set the position first (with PLACE X,Y,F)', "\n"
-    false
+    raise FormatError, "\nFormat Error:\n\tEither the PLACE command format is not followed or " \
+                       "arguments are of the wrong type!\n" \
+                       'Please note that you must set the position first (with PLACE X,Y,F)'
   end
 
   def move_robot(command)
