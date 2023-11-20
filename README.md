@@ -52,3 +52,37 @@ MOVE \
 REPORT \
 ->Robot's coordinates are 3,3 and it looks NORTH
 
+## Getting Started
+
+### Requirements:
+
+In order to run the project you need this software installed:
+
+1. Ruby
+2. Bundler
+
+## Usage
+
+### Run program
+
+```shell
+ruby app/simulator.rb
+```
+
+or you can also pass the file with commands:
+
+```shell
+ruby app/simulator.rb <file_with_commands>
+```
+
+### Tests
+
+```shell
+rspec
+```
+
+### Code style
+
+```shell
+rubocop
+```
