@@ -64,7 +64,7 @@ class Simulator
     place_params = gets.chomp.upcase
     validate_place_params(place_params)
 
-    place_params = place_params.split(/[\s,']/)
+    place_params = place_params.split(/[\s,]/)
     @robot.set_place(@desk, place_params[1].to_i, place_params[2].to_i, place_params[3])
   rescue FormatError, Robot::FallError, Robot::DirectionError => e
     puts e.message, "\n"
